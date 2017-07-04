@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="http://static.hitek.fr/img/actualite/2015/09/22/w_yqdv2.png">
+  <title>oui</title>
+</head>
+
+<body onKeyPress="if (event.keyCode == 13) enter()">
+  <div class="">
+    <svg height="400" width="200">
+       <line id="bat6" x1="0" y1="390" x2="200" y2="390" style="stroke:green;stroke-width:10" />
+       <line id="bat5" x1="50" y1="385" x2="50" y2="00" style="stroke:black;stroke-width:10" />
+       <line id="bat4" x1="50" y1="60" x2="120" y2="00" style="stroke:black;stroke-width:10" />
+       <line id="bat3" x1="50" y1="5" x2="200" y2="5" style="stroke:black;stroke-width:10" />
+       <line id="bat2" x1="180" y1="10" x2="180" y2="130" style="stroke:brown;stroke-width:6" />
+    </svg>
+    <figure id="bat1">
+      <img src="https://media4.obspm.fr/public/AMC/pages_base-optique-geo/images_texte/BoiteEinsteinExt.png" alt="">
+    </figure>
+    <figure id="bravo">
+      <img src="http://static.hitek.fr/img/actualite/2015/09/22/w_yqdv2.png" alt="">
+    </figure>
+  </div>
+
+  <h1 id="mot">Jouons</h1>
+  <h2 id="chance"></h2>
+  <h3 id="useless" >Press Enter</h3>
+  <!-- <h4 id="vole" ></h4> -->
+
+  <script type="text/javascript">
+    //Générateur de mot
+    var dico = ["oui", "non", "bref", "perdu", "pouet", "franfreuluche", "patate", "bigmac", "gras", "frite","pourquoi","attention","magnifique","bravo","pendu","sublime","ventilateur","facile","difficile","simple","mamene","biere","peruke","ouloullou"];
+    var mot = dico[Math.round((Math.random() * (dico.length)))];
+
+
+    var verif = mot.split("");
+
+
+    //Générateur de mot caché
+    var stars = [];
+    for (i = 0; i < mot.length; i++) {
+      stars.push("_");
+    }
+
+    document.getElementById("chance").innerHTML = stars;
+
+    //nombre de chances
+var chance = 6;
+var useless= "";
+function enter(){
+  if (chance!=0) {
+    pendu()
+  }
+}
+
+function pendu(){
+        //Demande
+          var rep = prompt("Saisir lettre").toLowerCase();
+          var x = false;
+
+          for (k = 0; k < mot.length; k++) { //parcour le mot
+            if (rep === mot[k]) { //si la lettre rep existe
+              x = true;
+
+              //change "_" par lettre trouvé si bon
+              stars.splice(k, 1, mot[k]);
+
+              // enleve la lettre trouvé de verif
+              verif.splice((verif.indexOf(rep)), 1);
+
+              // document.getElementById("vole").innerHTML = rep;
+              // document.getElementById("vole").classlist.add("anime");
+
+            }
+          }
+
+          // Lettre utilisée
+          useless += rep;
+          document.getElementById("useless").innerHTML ="Lettre utilisées: " +useless;
+
+
+          document.getElementById("mot").innerHTML = stars;
+
+          // Si verif est vide c'est gagné
+          if (verif[0] == undefined) {
+            document.getElementById("mot").innerHTML= mot;
+            document.getElementById("useless").innerHTML= "YOUPI";
+            document.getElementById("bravo").style.display = "block";
+
+          }
+
+          // Si bonne réponse
+          else if (x == true) {
+
+            //animation
+          }
+
+          // Si mauvaise réponse
+          else {
+            pendre();
+            chance--;
+          }
+          // chances restantes
+          document.getElementById("chance").innerHTML= "Chance : " + chance;
+
+          // Si perdu
+          if (chance==0) {
+            document.getElementById("mot").innerHTML= "Le mot était : " +mot;
+            document.getElementById("chance").innerHTML= "Perdu :(";
+          }
+          //si gagné
+          if (verif[0] == undefined) {
+            niveau();
+          }
+
+
+  }
+
+function niveau(){
+  if (chance == 1) {
+    document.getElementById("chance").innerHTML= "C'est pas passé loin";
+  }
+  else if (chance < 5) {
+    document.getElementById("chance").innerHTML= "Pas mal";
+  }
+  else if (chance == 5) {
+    document.getElementById("chance").innerHTML= "Great!";
+  }
+  else if (chance == 6) {
+    document.getElementById("chance").innerHTML= "PERFECT!!!!";
+  }
+}
+  function pendre(){
+      document.getElementById("bat"+chance).style.display = "block";
+  }
+
+
+  </script>
+</body>
+
+</html>

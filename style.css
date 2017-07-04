@@ -1,0 +1,48 @@
+*{
+  font-family:sans-serif;
+  text-align: center;
+}
+body{
+  background-color: lightblue;
+}
+
+
+img{
+  width: 100%;
+  height: 100%;
+}
+
+figure{
+  margin: 0;
+  position: absolute;
+  width: 200px;
+  top: 100px;
+  left: -20px;
+  margin-left: 50%;
+  display: none;
+}
+#bat1{
+}
+#bravo{
+  width: 400px;
+}
+line{
+  display: none;
+}
+input{
+  width: 50px;
+}
+.anim{
+  animation: anim;
+  position: absolute;
+  transition: 2s;
+}
+
+@keyframes anim {
+  from{
+    left: -10px;
+  }
+  to{
+    right: -10px;
+  }
+}
